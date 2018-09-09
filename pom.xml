@@ -20,20 +20,37 @@
 			<version>[4.0,)</version>
 		</dependency>
 		<dependency>
-			<groupId>org.eclipse</groupId>
-			<artifactId>swt</artifactId>
-			<version>3.3.0-v3346</version>
+			<groupId>org.eclipse.swt.org.eclipse.swt.cocoa.macosx.x86_64.4.3.swt</groupId>
+    		<artifactId>org.eclipse.swt.cocoa.macosx.x86_64</artifactId>
+    		<version>4.3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse</groupId>
 			<artifactId>jface</artifactId>
 			<version>3.3.0-I20070606-0010</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<version>1.10.19</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+    		<groupId>com.google.guava</groupId>
+    		<artifactId>guava</artifactId>
+    		<version>r05</version>
+		</dependency>
+		<dependency>
+    		<groupId>log4j</groupId>
+    		<artifactId>log4j</artifactId>
+    		<version>1.2.17</version>
 		</dependency>
 	</dependencies>
 </project>
