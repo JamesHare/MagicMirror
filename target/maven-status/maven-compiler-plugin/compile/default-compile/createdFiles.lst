@@ -1,0 +1,5 @@
+com\jamesmhare\magicmirror\views\ApplicationViewConstants.class
+com\jamesmhare\magicmirror\application\Application.class
+com\jamesmhare\magicmirror\applicationconstants\ApplicationConstants.class
+com\jamesmhare\magicmirror\views\ApplicationViewImpl.class
+com\jamesmhare\magicmirror\views\ApplicationView.class
