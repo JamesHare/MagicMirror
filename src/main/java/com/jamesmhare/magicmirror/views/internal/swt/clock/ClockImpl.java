@@ -1,0 +1,89 @@
+package com.jamesmhare.magicmirror.views.internal.swt.clock;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+
+import com.google.common.base.Preconditions;
+import com.jamesmhare.magicmirror.applicationconstants.ApplicationConstants;
+
+/**
+ * Serves as a class to display a digital clock with date and time by using
+ * {@link ClockLabel}.
+ * 
+ * @author James Hare
+ */
+public class ClockImpl implements Clock {
+
+	private Label runningDate;
+	private Label runningClock;
+	private Display display;
+
+	public ClockImpl(final Composite parent, Display display) {
+		Preconditions.checkArgument(parent != null, ClockImplConstants.COMPOSITE_NULL_ERROR_MESSAGE);
+		Preconditions.checkArgument(display != null, ClockImplConstants.DISPLAY_NULL_ERROR_MESSAGE);
+		parent.setBackground(ApplicationConstants.BLACK);
+		this.display = display;
+		runningDate = createClockLabel(parent, display, "EEEE, MMMM dd, yyyy", "Verdana", 14);
+		runningClock = createClockLabel(parent, display, "h:mm:ss a", "Arial Narrow", 32);
+		startClock();
+	}
+
+	private Label createClockLabel(Composite parent, Display display, String clockFormat, String fontType,
+			int fontSize) {
+		Preconditions.checkArgument(parent != null, ClockImplConstants.COMPOSITE_NULL_ERROR_MESSAGE);
+		Preconditions.checkArgument(display != null, ClockImplConstants.DISPLAY_NULL_ERROR_MESSAGE);
+		Preconditions.checkArgument(clockFormat != null, ClockImplConstants.CLOCKFORMAT_NULL_ERROR_MESSAGE);
+		Preconditions.checkArgument(!clockFormat.isEmpty(), ClockImplConstants.CLOCKFORMAT_EMPTY_ERROR_MESSAGE);
+		Preconditions.checkArgument(fontType != null, ClockImplConstants.FONTTYPE_NULL_ERROR_MESSAGE);
+		Preconditions.checkArgument(!fontType.isEmpty(), ClockImplConstants.FONTTYPE_EMPTY_ERROR_MESSAGE);
+		Label clockLabel = new Label(parent, SWT.NONE);
+		Font clockLabelFont = new Font(display, fontType, fontSize, SWT.NONE);
+		clockLabel.setText(new SimpleDateFormat(clockFormat).format(new Date()));
+		clockLabel.setBackground(ApplicationConstants.BLACK);
+		clockLabel.setForeground(ApplicationConstants.WHITE);
+		clockLabel.setFont(clockLabelFont);
+		return clockLabel;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public Label getRunningClock() {
+		return runningClock;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public Label getRunningDate() {
+		return runningDate;
+	}
+
+	private void startClock() {
+		new Thread() {
+			public void run() {
+				while (!display.isDisposed()) {
+					try {
+						Thread.sleep(1000);
+						display.asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								runningDate.setText(new SimpleDateFormat("EEEE, MMMM dd, yyyy").format(new Date()));
+								runningClock.setText(new SimpleDateFormat("h:mm:ss a").format(new Date()));
+							}
+						});
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}.start();
+	}
+
+}

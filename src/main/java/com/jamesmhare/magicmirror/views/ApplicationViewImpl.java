@@ -1,32 +1,60 @@
 package com.jamesmhare.magicmirror.views;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import com.google.common.base.Preconditions;
 import com.jamesmhare.magicmirror.applicationconstants.ApplicationConstants;
+import com.jamesmhare.magicmirror.views.internal.swt.clock.Clock;
+import com.jamesmhare.magicmirror.views.internal.swt.clock.ClockFactory;
 
 /**
  * Serves as the implementation of the {@link ApplicationView} and determines
  * how the application will look.
  * 
- * @author jameshare
+ * @author James Hare
  */
 public class ApplicationViewImpl implements ApplicationView {
 
 	private static Shell shell;
+	private static Display display;
+	private Clock clock;
+	private final ClockFactory clockFactory;
+
+	/**
+	 * Constructor for the parent view which handles the centering of the parent
+	 * {@link Shell} and ordering of the child Widgets.
+	 * 
+	 * @param shell   - The active parent {@link Shell}.
+	 * @param display - The current {@link Display}.
+	 */
+	public ApplicationViewImpl(final Shell shell, Display display) {
+		this(shell, display, new ClockFactory());
+	}
 
 	/**
 	 * Constructor for the parent view that sets the size of the shell, creates the
 	 * widgets inside the shell and centers the shell.
 	 * 
-	 * @param shell - The parent {@code Shell}.
+	 * @param shell        - The parent {@link Shell}.
+	 * @param display      - The current {@link Display}.
+	 * @param clockFactory = The factory for creating the {@link Clock}. Cannot be
+	 *                     {@link Null}.
 	 */
-	public ApplicationViewImpl(final Shell shell) {
+	public ApplicationViewImpl(final Shell shell, Display display, ClockFactory clockFactory) {
 		Preconditions.checkArgument(shell != null, ApplicationViewConstants.APPLICATION_VIEW_SHELL_NULL_ERROR_MESSAGE);
+		Preconditions.checkArgument(display != null,
+				ApplicationViewConstants.APPLICATION_VIEW_DISPLAY_NULL_ERROR_MESSAGE);
+		Preconditions.checkArgument(clockFactory != null,
+				ApplicationViewConstants.APPLICATION_VIEW_CLOCK_FACTORY_NULL_ERROR_MESSAGE);
 		ApplicationViewImpl.shell = shell;
+		ApplicationViewImpl.display = display;
+		this.clockFactory = clockFactory;
 		shell.setText(ApplicationViewConstants.APPLICATION_VIEW_SHELL_TITLE);
 		shell.setBackground(ApplicationConstants.BLACK);
 		/**
@@ -37,28 +65,31 @@ public class ApplicationViewImpl implements ApplicationView {
 		shell.setLayout(ApplicationViewLayout);
 		shell.setMinimumSize(shell.getSize());
 		centerShell(shell);
-		createWidgets(shell);
+		createWidgets(shell, display);
 	}
 
 	/**
-	 * Creates the widgets that make up the {@link ApplicationView}.
-	 * 
-	 * @param shell - The parent {@code Shell}.
+	 * {@inheritDoc}
 	 */
-	public void createWidgets(Shell shell) {
+	public void createWidgets(Shell shell, Display display) {
+		Preconditions.checkArgument(shell != null, ApplicationViewConstants.CREATE_WIDGETS_SHELL_NULL_ERROR_MESSAGE);
+		Preconditions.checkArgument(display != null,
+				ApplicationViewConstants.CREATE_WIDGETS_DISPLAY_NULL_ERROR_MESSAGE);
 		/**
 		 * Widgets will be added to this method as they are developed. Each one will be
 		 * given a number of columns, used for sizing its child shells, and a boolean
 		 * with true indicating that each column has an equal width.
 		 */
+		Composite clockComposite = new Composite(shell, SWT.NONE);
+		clockComposite.setLayout(new GridLayout(1, false));
+		clock = clockFactory.createClock(clockComposite, display);
 	}
 
 	/**
-	 * Centers a given {@link Shell}.
-	 * 
-	 * @param shell - The {@code Shell} to be centered.
+	 * {@inheritDoc}
 	 */
 	public void centerShell(Shell shell) {
+		Preconditions.checkArgument(shell != null, ApplicationViewConstants.CENTER_SHELL_SHELL_NULL_ERROR_MESSAGE);
 		Rectangle boundsOfDisplay = shell.getDisplay().getPrimaryMonitor().getBounds();
 		Point sizeOfShell = shell.getSize();
 		int leftShellBound = (boundsOfDisplay.width - sizeOfShell.x) / 2;

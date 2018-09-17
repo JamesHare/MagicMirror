@@ -7,7 +7,7 @@ import org.eclipse.swt.widgets.Display;
 /**
  * This class hold the constants to be used across the entire project.
  * 
- * @author jameshare
+ * @author James Hare
  */
 public class ApplicationConstants {
 	public static final Device device = Display.getCurrent();

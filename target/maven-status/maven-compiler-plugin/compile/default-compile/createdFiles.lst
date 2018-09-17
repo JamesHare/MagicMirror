@@ -1,5 +1,11 @@
+com\jamesmhare\magicmirror\views\internal\swt\clock\ClockImpl$1$1.class
+com\jamesmhare\magicmirror\views\internal\swt\clock\ClockImpl$1.class
+com\jamesmhare\magicmirror\views\ApplicationViewImpl.class
+com\jamesmhare\magicmirror\views\internal\swt\clock\Clock.class
 com\jamesmhare\magicmirror\views\ApplicationViewConstants.class
 com\jamesmhare\magicmirror\application\Application.class
+com\jamesmhare\magicmirror\views\internal\swt\clock\ClockFactory.class
 com\jamesmhare\magicmirror\applicationconstants\ApplicationConstants.class
-com\jamesmhare\magicmirror\views\ApplicationViewImpl.class
 com\jamesmhare\magicmirror\views\ApplicationView.class
+com\jamesmhare\magicmirror\views\internal\swt\clock\ClockImplConstants.class
+com\jamesmhare\magicmirror\views\internal\swt\clock\ClockImpl.class
