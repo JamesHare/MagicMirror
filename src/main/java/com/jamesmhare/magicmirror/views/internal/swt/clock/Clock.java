@@ -3,8 +3,8 @@ package com.jamesmhare.magicmirror.views.internal.swt.clock;
 import org.eclipse.swt.widgets.Label;
 
 /**
- * This serves as an interface for the Clock object that will use instances of
- * the (@link ClockLabel} to provide data and time information to the user.
+ * This serves as an interface for the Clock object that will show users date
+ * and time information.
  * 
  * @author James Hare
  */
