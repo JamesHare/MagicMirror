@@ -12,6 +12,8 @@ import com.google.common.base.Preconditions;
 import com.jamesmhare.magicmirror.applicationconstants.ApplicationConstants;
 import com.jamesmhare.magicmirror.views.internal.swt.clock.Clock;
 import com.jamesmhare.magicmirror.views.internal.swt.clock.ClockFactory;
+import com.jamesmhare.magicmirror.views.internal.swt.weather.Weather;
+import com.jamesmhare.magicmirror.views.internal.swt.weather.WeatherFactory;
 
 /**
  * Serves as the implementation of the {@link ApplicationView} and determines
@@ -24,7 +26,9 @@ public class ApplicationViewImpl implements ApplicationView {
 	private static Shell shell;
 	private static Display display;
 	private Clock clock;
+	private Weather weather;
 	private final ClockFactory clockFactory;
+	private final WeatherFactory weatherFactory;
 
 	/**
 	 * Constructor for the parent view which handles the centering of the parent
@@ -34,27 +38,33 @@ public class ApplicationViewImpl implements ApplicationView {
 	 * @param display - The current {@link Display}.
 	 */
 	public ApplicationViewImpl(final Shell shell, Display display) {
-		this(shell, display, new ClockFactory());
+		this(shell, display, new ClockFactory(), new WeatherFactory());
 	}
 
 	/**
 	 * Constructor for the parent view that sets the size of the shell, creates the
 	 * widgets inside the shell and centers the shell.
 	 * 
-	 * @param shell        - The parent {@link Shell}.
-	 * @param display      - The current {@link Display}.
-	 * @param clockFactory = The factory for creating the {@link Clock}. Cannot be
-	 *                     {@link Null}.
+	 * @param shell          - The parent {@link Shell}.
+	 * @param display        - The current {@link Display}.
+	 * @param clockFactory   - The factory for creating the {@link Clock}. Cannot be
+	 *                       {@link Null}.
+	 * @param weatherFactory - The factory for creating the {@link Weather}. Cannot
+	 *                       be {@link Null}.
 	 */
-	public ApplicationViewImpl(final Shell shell, Display display, ClockFactory clockFactory) {
+	public ApplicationViewImpl(final Shell shell, Display display, ClockFactory clockFactory,
+			WeatherFactory weatherFactory) {
 		Preconditions.checkArgument(shell != null, ApplicationViewConstants.APPLICATION_VIEW_SHELL_NULL_ERROR_MESSAGE);
 		Preconditions.checkArgument(display != null,
 				ApplicationViewConstants.APPLICATION_VIEW_DISPLAY_NULL_ERROR_MESSAGE);
 		Preconditions.checkArgument(clockFactory != null,
 				ApplicationViewConstants.APPLICATION_VIEW_CLOCK_FACTORY_NULL_ERROR_MESSAGE);
+		Preconditions.checkArgument(weatherFactory != null,
+				ApplicationViewConstants.APPLICATION_VIEW_WEATHER_FACTORY_NULL_ERROR_MESSAGE);
 		ApplicationViewImpl.shell = shell;
 		ApplicationViewImpl.display = display;
 		this.clockFactory = clockFactory;
+		this.weatherFactory = weatherFactory;
 		shell.setText(ApplicationViewConstants.APPLICATION_VIEW_SHELL_TITLE);
 		shell.setBackground(ApplicationConstants.BLACK);
 		/**
@@ -83,6 +93,9 @@ public class ApplicationViewImpl implements ApplicationView {
 		Composite clockComposite = new Composite(shell, SWT.NONE);
 		clockComposite.setLayout(new GridLayout(1, false));
 		clock = clockFactory.createClock(clockComposite, display);
+		Composite weatherComposite = new Composite(shell, SWT.NONE);
+		weatherComposite.setLayout(new GridLayout(2, false));
+		weather = weatherFactory.createWeather(weatherComposite, display);
 	}
 
 	/**

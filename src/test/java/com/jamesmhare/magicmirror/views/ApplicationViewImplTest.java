@@ -17,6 +17,9 @@ import org.mockito.MockitoAnnotations;
 import com.jamesmhare.magicmirror.views.internal.swt.clock.Clock;
 import com.jamesmhare.magicmirror.views.internal.swt.clock.ClockFactory;
 import com.jamesmhare.magicmirror.views.internal.swt.clock.ClockImpl;
+import com.jamesmhare.magicmirror.views.internal.swt.weather.Weather;
+import com.jamesmhare.magicmirror.views.internal.swt.weather.WeatherFactory;
+import com.jamesmhare.magicmirror.views.internal.swt.weather.WeatherImpl;
 
 /**
  * Test class for {@link ApplicationViewImpl}.
@@ -30,7 +33,9 @@ public class ApplicationViewImplTest {
 	private Display display;
 	private ApplicationViewImpl testApplicationViewImpl;
 	private Clock mockClock;
+	private Weather mockWeather;
 	private ClockFactory mockClockFactory;
+	private WeatherFactory mockWeatherFactory;
 
 	/**
 	 * Runs before the tests the open a new Shell.
@@ -41,6 +46,7 @@ public class ApplicationViewImplTest {
 		shell = getShell();
 		display = mock(Display.class);
 		createMockClock();
+		createMockWeather();
 	}
 
 	/**
@@ -73,7 +79,18 @@ public class ApplicationViewImplTest {
 	public void testErrorWhenApplicationViewClockFactoryIsNull() {
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage(ApplicationViewConstants.APPLICATION_VIEW_CLOCK_FACTORY_NULL_ERROR_MESSAGE);
-		testApplicationViewImpl = new ApplicationViewImpl(shell, display, null);
+		testApplicationViewImpl = new ApplicationViewImpl(shell, display, null, mockWeatherFactory);
+	}
+
+	/**
+	 * Test to ensure that {@link IllegalArgumentException} is thrown when the
+	 * {@link WeatherFactory} is {@link Null}.
+	 */
+	@Test
+	public void testErrorWhenApplicationViewWeatherFactoryIsNull() {
+		exception.expect(IllegalArgumentException.class);
+		exception.expectMessage(ApplicationViewConstants.APPLICATION_VIEW_WEATHER_FACTORY_NULL_ERROR_MESSAGE);
+		testApplicationViewImpl = new ApplicationViewImpl(shell, display, mockClockFactory, null);
 	}
 
 	/**
@@ -81,7 +98,7 @@ public class ApplicationViewImplTest {
 	 */
 	@Test
 	public void testShellMinimumSizeIsSet() {
-		testApplicationViewImpl = new ApplicationViewImpl(shell, display, mockClockFactory);
+		testApplicationViewImpl = new ApplicationViewImpl(shell, display, mockClockFactory, mockWeatherFactory);
 		assertEquals(shell.getSize(), shell.getMinimumSize());
 	}
 
@@ -109,4 +126,10 @@ public class ApplicationViewImplTest {
 				.thenReturn(mockClock);
 	}
 
+	private void createMockWeather() {
+		mockWeather = mock(WeatherImpl.class);
+		mockWeatherFactory = mock(WeatherFactory.class);
+		when(mockWeatherFactory.createWeather(Mockito.any(Composite.class), Mockito.any(Display.class)))
+				.thenReturn(mockWeather);
+	}
 }

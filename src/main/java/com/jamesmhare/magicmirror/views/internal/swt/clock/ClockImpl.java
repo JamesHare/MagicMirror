@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.SWTException;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -14,7 +15,7 @@ import com.jamesmhare.magicmirror.applicationconstants.ApplicationConstants;
 
 /**
  * Serves as a class to display a digital clock with date and time by using
- * {@link ClockLabel}.
+ * {@link SimpleDateFormat}.
  * 
  * @author James Hare
  */
@@ -67,7 +68,7 @@ public class ClockImpl implements Clock {
 
 	private void startClock() {
 		new Thread() {
-			public void run() {
+			public void run() throws SWTException {
 				while (!display.isDisposed()) {
 					try {
 						Thread.sleep(1000);
