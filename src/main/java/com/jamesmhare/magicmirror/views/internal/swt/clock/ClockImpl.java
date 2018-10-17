@@ -3,6 +3,7 @@ package com.jamesmhare.magicmirror.views.internal.swt.clock;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTException;
 import org.eclipse.swt.graphics.Font;
@@ -24,6 +25,7 @@ public class ClockImpl implements Clock {
 	private Label runningDate;
 	private Label runningClock;
 	private Display display;
+	private static final Logger LOGGER = Logger.getLogger(ClockImpl.class);
 
 	public ClockImpl(final Composite parent, Display display) {
 		Preconditions.checkArgument(parent != null, ClockImplConstants.COMPOSITE_NULL_ERROR_MESSAGE);
@@ -67,6 +69,7 @@ public class ClockImpl implements Clock {
 	}
 
 	private void startClock() {
+		LOGGER.info(ClockImplConstants.LOG_MESSAGE_STARTING_CLOCK_THREAD);
 		new Thread() {
 			public void run() throws SWTException {
 				while (!display.isDisposed()) {
@@ -75,16 +78,20 @@ public class ClockImpl implements Clock {
 						display.asyncExec(new Runnable() {
 							@Override
 							public void run() {
-								runningDate.setText(new SimpleDateFormat("EEEE, MMMM dd, yyyy").format(new Date()));
-								runningClock.setText(new SimpleDateFormat("h:mm:ss a").format(new Date()));
+								updateClock();
 							}
 						});
 					} catch (InterruptedException e) {
-						e.printStackTrace();
+						LOGGER.error(ClockImplConstants.CLOCK_THREAD_ERROR_MESSAGE + e);
 					}
 				}
 			}
 		}.start();
+	}
+
+	private void updateClock() {
+		runningDate.setText(new SimpleDateFormat("EEEE, MMMM dd, yyyy").format(new Date()));
+		runningClock.setText(new SimpleDateFormat("h:mm:ss a").format(new Date()));
 	}
 
 }

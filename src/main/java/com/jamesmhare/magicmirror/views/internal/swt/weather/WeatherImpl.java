@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.SWTException;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -43,6 +44,11 @@ public class WeatherImpl implements Weather {
 		this.display = display;
 		parent.setBackground(ApplicationConstants.BLACK);
 		properties = new ApplicationProperties();
+		updateWeather(parent);
+		startWeatherUpdater(parent);
+	}
+
+	private void updateWeather(Composite parent) {
 		weatherData = retrieveWeatherData();
 		currentConditions = createWeatherLabel(parent, display,
 				extractStringElementFromInnerJSONArray(weatherData, "weather", "description") + " in "
@@ -69,15 +75,38 @@ public class WeatherImpl implements Weather {
 			WebResource webResource = client.resource(callToAPI);
 			ClientResponse response = webResource.accept("application/json").post(ClientResponse.class);
 			if (response.getStatus() != 200) {
-				LOGGER.error("" + "Failed: Weather call HTTP error code " + response.getStatus());
+				LOGGER.error(WeatherImplConstants.WEATHER_REST_CALL_ERROR_MESSAGE + response.getStatus());
 			}
 			String result = response.getEntity(String.class);
 			JSONParser parser = new JSONParser();
 			output = (JSONObject) parser.parse(result);
+			LOGGER.info(WeatherImplConstants.LOG_MESSAGE_WEATHER_INFO_RETRIEVED);
 		} catch (Exception exception) {
 			LOGGER.error(exception.getMessage());
 		}
 		return output;
+	}
+
+	private void startWeatherUpdater(Composite parent) {
+		LOGGER.info(WeatherImplConstants.LOG_MESSAGE_STARTING_WEATHER_UPDATE_THREAD);
+		new Thread() {
+			public void run() throws SWTException {
+				while (!display.isDisposed()) {
+					try {
+						Thread.sleep(900000); // sleep for 15 minutes.
+						display.asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								updateWeather(parent);
+								LOGGER.info(WeatherImplConstants.LOG_MESSAGE_WEATHER_INFO_UPDATED);
+							}
+						});
+					} catch (InterruptedException e) {
+						LOGGER.error(WeatherImplConstants.WEATHER_UPDATE_THREAD_ERROR_MESSAGE + e);
+					}
+				}
+			}
+		}.start();
 	}
 
 	private Label createWeatherLabel(Composite parent, Display display, String text, String fontType, int fontSize) {
