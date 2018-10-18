@@ -94,7 +94,7 @@ public class ApplicationViewImpl implements ApplicationView {
 		clockComposite.setLayout(new GridLayout(1, false));
 		clock = clockFactory.createClock(clockComposite, display);
 		Composite weatherComposite = new Composite(shell, SWT.NONE);
-		weatherComposite.setLayout(new GridLayout(2, false));
+		weatherComposite.setLayout(new GridLayout(1, false));
 		weather = weatherFactory.createWeather(weatherComposite, display);
 	}
 

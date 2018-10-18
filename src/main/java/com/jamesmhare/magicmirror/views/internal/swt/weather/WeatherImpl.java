@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTException;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
@@ -122,6 +123,8 @@ public class WeatherImpl implements Weather {
 		weatherLabel.setBackground(ApplicationConstants.BLACK);
 		weatherLabel.setForeground(ApplicationConstants.WHITE);
 		weatherLabel.setFont(weatherLabelFont);
+		weatherLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, true, true, 1, 1));
+		// weatherLabel.setAlignment(SWT.RIGHT);
 		return weatherLabel;
 	}
 
