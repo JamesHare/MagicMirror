@@ -14,6 +14,8 @@ import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import com.jamesmhare.magicmirror.views.internal.swt.InspiringQuotesWidget.InspiringQuotesWidget;
+import com.jamesmhare.magicmirror.views.internal.swt.InspiringQuotesWidget.InspiringQuotesWidgetFactory;
 import com.jamesmhare.magicmirror.views.internal.swt.clock.Clock;
 import com.jamesmhare.magicmirror.views.internal.swt.clock.ClockFactory;
 import com.jamesmhare.magicmirror.views.internal.swt.clock.ClockImpl;
@@ -34,8 +36,10 @@ public class ApplicationViewImplTest {
 	private ApplicationViewImpl testApplicationViewImpl;
 	private Clock mockClock;
 	private Weather mockWeather;
+	private InspiringQuotesWidget mockInspiringQuotesWidget;
 	private ClockFactory mockClockFactory;
 	private WeatherFactory mockWeatherFactory;
+	private InspiringQuotesWidgetFactory mockInspiringQuotesWidgetFactory;
 
 	/**
 	 * Runs before the tests the open a new Shell.
@@ -47,6 +51,7 @@ public class ApplicationViewImplTest {
 		display = mock(Display.class);
 		createMockClock();
 		createMockWeather();
+		createMockInspiringQuotesWidget();
 	}
 
 	/**
@@ -79,7 +84,8 @@ public class ApplicationViewImplTest {
 	public void testErrorWhenApplicationViewClockFactoryIsNull() {
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage(ApplicationViewConstants.APPLICATION_VIEW_CLOCK_FACTORY_NULL_ERROR_MESSAGE);
-		testApplicationViewImpl = new ApplicationViewImpl(shell, display, null, mockWeatherFactory);
+		testApplicationViewImpl = new ApplicationViewImpl(shell, display, null, mockWeatherFactory,
+				mockInspiringQuotesWidgetFactory);
 	}
 
 	/**
@@ -90,7 +96,20 @@ public class ApplicationViewImplTest {
 	public void testErrorWhenApplicationViewWeatherFactoryIsNull() {
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage(ApplicationViewConstants.APPLICATION_VIEW_WEATHER_FACTORY_NULL_ERROR_MESSAGE);
-		testApplicationViewImpl = new ApplicationViewImpl(shell, display, mockClockFactory, null);
+		testApplicationViewImpl = new ApplicationViewImpl(shell, display, mockClockFactory, null,
+				mockInspiringQuotesWidgetFactory);
+	}
+
+	/**
+	 * Test to ensure that {@link IllegalArgumentException} is thrown when the
+	 * {@link InspiringQuotesWidgetFactory} is {@link Null}.
+	 */
+	@Test
+	public void testErrorWhenApplicationViewInspiringQuotesWidgetFactoryIsNull() {
+		exception.expect(IllegalArgumentException.class);
+		exception.expectMessage(
+				ApplicationViewConstants.APPLICATION_VIEW_INSPIRING_QUOTES_WIDGET_FACTORY_NULL_ERROR_MESSAGE);
+		testApplicationViewImpl = new ApplicationViewImpl(shell, display, mockClockFactory, mockWeatherFactory, null);
 	}
 
 	/**
@@ -98,7 +117,8 @@ public class ApplicationViewImplTest {
 	 */
 	@Test
 	public void testShellMinimumSizeIsSet() {
-		testApplicationViewImpl = new ApplicationViewImpl(shell, display, mockClockFactory, mockWeatherFactory);
+		testApplicationViewImpl = new ApplicationViewImpl(shell, display, mockClockFactory, mockWeatherFactory,
+				mockInspiringQuotesWidgetFactory);
 		assertEquals(shell.getSize(), shell.getMinimumSize());
 	}
 
@@ -131,5 +151,12 @@ public class ApplicationViewImplTest {
 		mockWeatherFactory = mock(WeatherFactory.class);
 		when(mockWeatherFactory.createWeather(Mockito.any(Composite.class), Mockito.any(Display.class)))
 				.thenReturn(mockWeather);
+	}
+
+	private void createMockInspiringQuotesWidget() {
+		mockInspiringQuotesWidget = mock(InspiringQuotesWidget.class);
+		mockInspiringQuotesWidgetFactory = mock(InspiringQuotesWidgetFactory.class);
+		when(mockInspiringQuotesWidgetFactory.createInspiringQuotesWidget(Mockito.any(Composite.class),
+				Mockito.any(Display.class))).thenReturn(mockInspiringQuotesWidget);
 	}
 }

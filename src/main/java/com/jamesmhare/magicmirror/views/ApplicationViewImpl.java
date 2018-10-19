@@ -10,6 +10,8 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.google.common.base.Preconditions;
 import com.jamesmhare.magicmirror.applicationconstants.ApplicationConstants;
+import com.jamesmhare.magicmirror.views.internal.swt.InspiringQuotesWidget.InspiringQuotesWidget;
+import com.jamesmhare.magicmirror.views.internal.swt.InspiringQuotesWidget.InspiringQuotesWidgetFactory;
 import com.jamesmhare.magicmirror.views.internal.swt.clock.Clock;
 import com.jamesmhare.magicmirror.views.internal.swt.clock.ClockFactory;
 import com.jamesmhare.magicmirror.views.internal.swt.weather.Weather;
@@ -27,8 +29,10 @@ public class ApplicationViewImpl implements ApplicationView {
 	private static Display display;
 	private Clock clock;
 	private Weather weather;
+	private InspiringQuotesWidget inspiringQuotesWidget;
 	private final ClockFactory clockFactory;
 	private final WeatherFactory weatherFactory;
+	private final InspiringQuotesWidgetFactory inspiringQuotesWidgetFactory;
 
 	/**
 	 * Constructor for the parent view which handles the centering of the parent
@@ -38,22 +42,25 @@ public class ApplicationViewImpl implements ApplicationView {
 	 * @param display - The current {@link Display}.
 	 */
 	public ApplicationViewImpl(final Shell shell, Display display) {
-		this(shell, display, new ClockFactory(), new WeatherFactory());
+		this(shell, display, new ClockFactory(), new WeatherFactory(), new InspiringQuotesWidgetFactory());
 	}
 
 	/**
 	 * Constructor for the parent view that sets the size of the shell, creates the
 	 * widgets inside the shell and centers the shell.
 	 * 
-	 * @param shell          - The parent {@link Shell}.
-	 * @param display        - The current {@link Display}.
-	 * @param clockFactory   - The factory for creating the {@link Clock}. Cannot be
-	 *                       {@link Null}.
-	 * @param weatherFactory - The factory for creating the {@link Weather}. Cannot
-	 *                       be {@link Null}.
+	 * @param shell                        - The parent {@link Shell}.
+	 * @param display                      - The current {@link Display}.
+	 * @param clockFactory                 - The factory for creating the
+	 *                                     {@link Clock}. Cannot be {@link Null}.
+	 * @param weatherFactory               - The factory for creating the
+	 *                                     {@link Weather}. Cannot be {@link Null}.
+	 * @param inspiringQuotesWidgetFactory - The factory for creating the
+	 *                                     {@link InspiringQuotesWidget}. Cannot be
+	 *                                     {@link Null}.
 	 */
 	public ApplicationViewImpl(final Shell shell, Display display, ClockFactory clockFactory,
-			WeatherFactory weatherFactory) {
+			WeatherFactory weatherFactory, InspiringQuotesWidgetFactory inspiringQuotesWidgetFactory) {
 		Preconditions.checkArgument(shell != null, ApplicationViewConstants.APPLICATION_VIEW_SHELL_NULL_ERROR_MESSAGE);
 		Preconditions.checkArgument(display != null,
 				ApplicationViewConstants.APPLICATION_VIEW_DISPLAY_NULL_ERROR_MESSAGE);
@@ -61,10 +68,13 @@ public class ApplicationViewImpl implements ApplicationView {
 				ApplicationViewConstants.APPLICATION_VIEW_CLOCK_FACTORY_NULL_ERROR_MESSAGE);
 		Preconditions.checkArgument(weatherFactory != null,
 				ApplicationViewConstants.APPLICATION_VIEW_WEATHER_FACTORY_NULL_ERROR_MESSAGE);
+		Preconditions.checkArgument(inspiringQuotesWidgetFactory != null,
+				ApplicationViewConstants.APPLICATION_VIEW_INSPIRING_QUOTES_WIDGET_FACTORY_NULL_ERROR_MESSAGE);
 		ApplicationViewImpl.shell = shell;
 		ApplicationViewImpl.display = display;
 		this.clockFactory = clockFactory;
 		this.weatherFactory = weatherFactory;
+		this.inspiringQuotesWidgetFactory = inspiringQuotesWidgetFactory;
 		shell.setText(ApplicationViewConstants.APPLICATION_VIEW_SHELL_TITLE);
 		shell.setBackground(ApplicationConstants.BLACK);
 		/**
@@ -96,6 +106,10 @@ public class ApplicationViewImpl implements ApplicationView {
 		Composite weatherComposite = new Composite(shell, SWT.NONE);
 		weatherComposite.setLayout(new GridLayout(1, false));
 		weather = weatherFactory.createWeather(weatherComposite, display);
+		Composite inspiringQuotesComposite = new Composite(shell, SWT.NONE);
+		inspiringQuotesComposite.setLayout(new GridLayout(1, false));
+		inspiringQuotesWidget = inspiringQuotesWidgetFactory.createInspiringQuotesWidget(inspiringQuotesComposite,
+				display);
 	}
 
 	/**
