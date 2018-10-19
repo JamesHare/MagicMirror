@@ -8,6 +8,12 @@ import org.eclipse.swt.widgets.Label;
 import com.google.common.base.Preconditions;
 import com.jamesmhare.magicmirror.applicationconstants.ApplicationConstants;
 
+/**
+ * Serves as a class to display the {@link InspiringQuotesWidget} a new
+ * inspiring quote every day.
+ * 
+ * @author James Hare
+ */
 public class InspiringQuotesWidgetImpl implements InspiringQuotesWidget {
 	private Label quoteLabel;
 	private Label authorLabel;

@@ -1,5 +1,0 @@
-2018-10-19 00:12:24,026  INFO [main] - Starting Clock thread.
-2018-10-19 00:12:24,530 ERROR [main] - Illegal character in query at index 58: http://api.openweathermap.org/data/2.5/weather?zip=[INSERT ZIPCODE HERE],us&APPID=[INSERT API KEY HERE]
-2018-10-19 00:14:37,142  INFO [main] - Starting Clock thread.
-2018-10-19 00:14:38,202  INFO [main] - The Weather information has been successfully retrieved.
-2018-10-19 00:14:38,207  INFO [main] - Starting Weather update thread.
