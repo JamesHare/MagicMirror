@@ -74,9 +74,10 @@ public class WeatherImpl implements Weather {
 					+ properties.getProperty("UserZipCode") + ",us&APPID="
 					+ properties.getProperty("OpenWeatherMapAPIKey");
 			WebResource webResource = client.resource(callToAPI);
-			ClientResponse response = webResource.accept("application/json").post(ClientResponse.class);
+			ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
 			if (response.getStatus() != 200) {
 				LOGGER.error(WeatherImplConstants.WEATHER_REST_CALL_ERROR_MESSAGE + response.getStatus());
+				throw new Exception();
 			}
 			String result = response.getEntity(String.class);
 			JSONParser parser = new JSONParser();
