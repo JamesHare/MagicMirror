@@ -2,6 +2,7 @@ package com.jamesmhare.magicmirror.views.internal.swt.InspiringQuotesWidget;
 
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.SWTException;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
@@ -13,6 +14,7 @@ import org.json.simple.parser.JSONParser;
 
 import com.google.common.base.Preconditions;
 import com.jamesmhare.magicmirror.applicationconstants.ApplicationConstants;
+import com.jamesmhare.magicmirror.views.internal.swt.weather.WeatherImplConstants;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -36,6 +38,7 @@ public class InspiringQuotesWidgetImpl implements InspiringQuotesWidget {
 		parent.setBackground(ApplicationConstants.BLACK);
 		this.display = display;
 		updateQuote(parent);
+		startInspiringQuoteWidgetUpdater(parent);
 	}
 
 	private void updateQuote(Composite parent) {
@@ -66,6 +69,29 @@ public class InspiringQuotesWidgetImpl implements InspiringQuotesWidget {
 			LOGGER.error(exception.getMessage());
 		}
 		return output;
+	}
+
+	private void startInspiringQuoteWidgetUpdater(Composite parent) {
+		LOGGER.info(InspiringQuotesWidgetImplConstants.STARTING_INSPIRING_QUOTE_THREAD_LOG_MESSAGE);
+		new Thread() {
+			public void run() throws SWTException {
+				while (!display.isDisposed()) {
+					try {
+						Thread.sleep(86400000); // sleep for 24 hours.
+						display.asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								updateQuote(parent);
+								LOGGER.info(
+										InspiringQuotesWidgetImplConstants.LOG_MESSAGE_INSPIRING_QUOTE_INFO_UPDATED);
+							}
+						});
+					} catch (InterruptedException e) {
+						LOGGER.error(WeatherImplConstants.WEATHER_UPDATE_THREAD_ERROR_MESSAGE + e);
+					}
+				}
+			}
+		}.start();
 	}
 
 	private Label createLabel(Composite parent, Display display, String text, String fontType, int fontSize) {
