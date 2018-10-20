@@ -14,7 +14,6 @@ import org.json.simple.parser.JSONParser;
 
 import com.google.common.base.Preconditions;
 import com.jamesmhare.magicmirror.applicationconstants.ApplicationConstants;
-import com.jamesmhare.magicmirror.views.internal.swt.weather.WeatherImplConstants;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -87,7 +86,8 @@ public class InspiringQuotesWidgetImpl implements InspiringQuotesWidget {
 							}
 						});
 					} catch (InterruptedException e) {
-						LOGGER.error(WeatherImplConstants.WEATHER_UPDATE_THREAD_ERROR_MESSAGE + e);
+						LOGGER.error(
+								InspiringQuotesWidgetImplConstants.INSPIRING_QUOTE_UPDATE_THREAD_ERROR_MESSAGE + e);
 					}
 				}
 			}
