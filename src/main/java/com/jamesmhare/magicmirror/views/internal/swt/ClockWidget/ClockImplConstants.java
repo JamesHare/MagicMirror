@@ -1,4 +1,4 @@
-package com.jamesmhare.magicmirror.views.internal.swt.clock;
+package com.jamesmhare.magicmirror.views.internal.swt.ClockWidget;
 
 /**
  * This class contains the constants for the {@link ClockImpl}.

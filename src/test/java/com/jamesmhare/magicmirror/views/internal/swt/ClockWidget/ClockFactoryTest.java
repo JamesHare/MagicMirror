@@ -1,4 +1,4 @@
-package com.jamesmhare.magicmirror.views.internal.swt.clock;
+package com.jamesmhare.magicmirror.views.internal.swt.ClockWidget;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
@@ -13,6 +13,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
+
+import com.jamesmhare.magicmirror.views.internal.swt.ClockWidget.Clock;
+import com.jamesmhare.magicmirror.views.internal.swt.ClockWidget.ClockFactory;
+import com.jamesmhare.magicmirror.views.internal.swt.ClockWidget.ClockImplConstants;
 
 /**
  * Test for the {@link ClockFactory} class.

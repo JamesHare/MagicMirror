@@ -1,4 +1,4 @@
-package com.jamesmhare.magicmirror.views.internal.swt.clock;
+package com.jamesmhare.magicmirror.views.internal.swt.ClockWidget;
 
 import org.eclipse.swt.widgets.Label;
 

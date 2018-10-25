@@ -1,4 +1,4 @@
-package com.jamesmhare.magicmirror.views.internal.swt.clock;
+package com.jamesmhare.magicmirror.views.internal.swt.ClockWidget;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

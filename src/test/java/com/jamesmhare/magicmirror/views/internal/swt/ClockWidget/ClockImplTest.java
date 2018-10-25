@@ -1,4 +1,4 @@
-package com.jamesmhare.magicmirror.views.internal.swt.clock;
+package com.jamesmhare.magicmirror.views.internal.swt.ClockWidget;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertEquals;
@@ -15,6 +15,9 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import com.jamesmhare.magicmirror.applicationconstants.ApplicationConstants;
+import com.jamesmhare.magicmirror.views.internal.swt.ClockWidget.Clock;
+import com.jamesmhare.magicmirror.views.internal.swt.ClockWidget.ClockImpl;
+import com.jamesmhare.magicmirror.views.internal.swt.ClockWidget.ClockImplConstants;
 
 /**
  * Test for the {@link ClockImpl} class.

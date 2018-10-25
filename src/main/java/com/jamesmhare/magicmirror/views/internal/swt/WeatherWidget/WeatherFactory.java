@@ -1,4 +1,4 @@
-package com.jamesmhare.magicmirror.views.internal.swt.weather;
+package com.jamesmhare.magicmirror.views.internal.swt.WeatherWidget;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;

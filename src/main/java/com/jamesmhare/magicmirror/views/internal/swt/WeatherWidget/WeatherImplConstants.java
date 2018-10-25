@@ -1,4 +1,4 @@
-package com.jamesmhare.magicmirror.views.internal.swt.weather;
+package com.jamesmhare.magicmirror.views.internal.swt.WeatherWidget;
 
 /**
  * This class contains the constants for the {@link WeatherImpl}.

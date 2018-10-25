@@ -1,4 +1,4 @@
-package com.jamesmhare.magicmirror.views.internal.swt.weather;
+package com.jamesmhare.magicmirror.views.internal.swt.WeatherWidget;
 
 /**
  * This serves as an interface for the Weather object that will show users

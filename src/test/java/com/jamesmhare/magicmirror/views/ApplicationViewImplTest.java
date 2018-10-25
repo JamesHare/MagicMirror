@@ -14,14 +14,16 @@ import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import com.jamesmhare.magicmirror.views.internal.swt.ClockWidget.Clock;
+import com.jamesmhare.magicmirror.views.internal.swt.ClockWidget.ClockFactory;
+import com.jamesmhare.magicmirror.views.internal.swt.ClockWidget.ClockImpl;
 import com.jamesmhare.magicmirror.views.internal.swt.InspiringQuotesWidget.InspiringQuotesWidget;
 import com.jamesmhare.magicmirror.views.internal.swt.InspiringQuotesWidget.InspiringQuotesWidgetFactory;
-import com.jamesmhare.magicmirror.views.internal.swt.clock.Clock;
-import com.jamesmhare.magicmirror.views.internal.swt.clock.ClockFactory;
-import com.jamesmhare.magicmirror.views.internal.swt.clock.ClockImpl;
-import com.jamesmhare.magicmirror.views.internal.swt.weather.Weather;
-import com.jamesmhare.magicmirror.views.internal.swt.weather.WeatherFactory;
-import com.jamesmhare.magicmirror.views.internal.swt.weather.WeatherImpl;
+import com.jamesmhare.magicmirror.views.internal.swt.NewsWidget.NewsWidget;
+import com.jamesmhare.magicmirror.views.internal.swt.NewsWidget.NewsWidgetFactory;
+import com.jamesmhare.magicmirror.views.internal.swt.WeatherWidget.Weather;
+import com.jamesmhare.magicmirror.views.internal.swt.WeatherWidget.WeatherFactory;
+import com.jamesmhare.magicmirror.views.internal.swt.WeatherWidget.WeatherImpl;
 
 /**
  * Test class for {@link ApplicationViewImpl}.
@@ -37,9 +39,11 @@ public class ApplicationViewImplTest {
 	private Clock mockClock;
 	private Weather mockWeather;
 	private InspiringQuotesWidget mockInspiringQuotesWidget;
+	private NewsWidget mockNewsWidget;
 	private ClockFactory mockClockFactory;
 	private WeatherFactory mockWeatherFactory;
 	private InspiringQuotesWidgetFactory mockInspiringQuotesWidgetFactory;
+	private NewsWidgetFactory mockNewsWidgetFactory;
 
 	/**
 	 * Runs before the tests the open a new Shell.
@@ -52,6 +56,7 @@ public class ApplicationViewImplTest {
 		createMockClock();
 		createMockWeather();
 		createMockInspiringQuotesWidget();
+		createMockNewsWidget();
 	}
 
 	/**
@@ -85,7 +90,7 @@ public class ApplicationViewImplTest {
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage(ApplicationViewConstants.APPLICATION_VIEW_CLOCK_FACTORY_NULL_ERROR_MESSAGE);
 		testApplicationViewImpl = new ApplicationViewImpl(shell, display, null, mockWeatherFactory,
-				mockInspiringQuotesWidgetFactory);
+				mockInspiringQuotesWidgetFactory, mockNewsWidgetFactory);
 	}
 
 	/**
@@ -97,7 +102,7 @@ public class ApplicationViewImplTest {
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage(ApplicationViewConstants.APPLICATION_VIEW_WEATHER_FACTORY_NULL_ERROR_MESSAGE);
 		testApplicationViewImpl = new ApplicationViewImpl(shell, display, mockClockFactory, null,
-				mockInspiringQuotesWidgetFactory);
+				mockInspiringQuotesWidgetFactory, mockNewsWidgetFactory);
 	}
 
 	/**
@@ -109,7 +114,20 @@ public class ApplicationViewImplTest {
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage(
 				ApplicationViewConstants.APPLICATION_VIEW_INSPIRING_QUOTES_WIDGET_FACTORY_NULL_ERROR_MESSAGE);
-		testApplicationViewImpl = new ApplicationViewImpl(shell, display, mockClockFactory, mockWeatherFactory, null);
+		testApplicationViewImpl = new ApplicationViewImpl(shell, display, mockClockFactory, mockWeatherFactory, null,
+				mockNewsWidgetFactory);
+	}
+
+	/**
+	 * Test to ensure that {@link IllegalArgumentException} is thrown when the
+	 * {@link NewsWidgetFactory} is {@link Null}.
+	 */
+	@Test
+	public void testErrorWhenApplicationViewNewsWidgetFactoryIsNull() {
+		exception.expect(IllegalArgumentException.class);
+		exception.expectMessage(ApplicationViewConstants.APPLICATION_VIEW_NEWS_WIDGET_FACTORY_NULL_ERROR_MESSAGE);
+		testApplicationViewImpl = new ApplicationViewImpl(shell, display, mockClockFactory, mockWeatherFactory,
+				mockInspiringQuotesWidgetFactory, null);
 	}
 
 	/**
@@ -118,7 +136,7 @@ public class ApplicationViewImplTest {
 	@Test
 	public void testShellMinimumSizeIsSet() {
 		testApplicationViewImpl = new ApplicationViewImpl(shell, display, mockClockFactory, mockWeatherFactory,
-				mockInspiringQuotesWidgetFactory);
+				mockInspiringQuotesWidgetFactory, mockNewsWidgetFactory);
 		assertEquals(shell.getSize(), shell.getMinimumSize());
 	}
 
@@ -158,5 +176,12 @@ public class ApplicationViewImplTest {
 		mockInspiringQuotesWidgetFactory = mock(InspiringQuotesWidgetFactory.class);
 		when(mockInspiringQuotesWidgetFactory.createInspiringQuotesWidget(Mockito.any(Composite.class),
 				Mockito.any(Display.class))).thenReturn(mockInspiringQuotesWidget);
+	}
+
+	private void createMockNewsWidget() {
+		mockNewsWidget = mock(NewsWidget.class);
+		mockNewsWidgetFactory = mock(NewsWidgetFactory.class);
+		when(mockNewsWidgetFactory.createNewsWidget(Mockito.any(Composite.class), Mockito.any(Display.class)))
+				.thenReturn(mockNewsWidget);
 	}
 }
