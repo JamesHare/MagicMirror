@@ -1,6 +1,5 @@
 package com.jamesmhare.magicmirror.views.internal.swt.NewsWidget;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTException;
@@ -45,12 +44,10 @@ public class NewsWidgetImpl implements NewsWidget {
 
 	private void updateNewsWidget(Composite parent) {
 		newsData = retrieveNewsWidgetData();
-		for (Label headline : headlines) {
-			headline = createNewsWidgetLabel(parent, display,
-					extractStringElementFromInnerObjectInInnerJSONArray(newsData, "articles",
-							ArrayUtils.indexOf(headlines, headline), "source", "name") + ": "
-							+ extractStringElementFromInnerJSONArray(newsData, "articles",
-									ArrayUtils.indexOf(headlines, headline), "title"),
+		for (int i = 0; i < headlines.length; i++) {
+			headlines[i] = createNewsWidgetLabel(parent, display,
+					extractStringElementFromInnerObjectInInnerJSONArray(newsData, "articles", i, "source", "name")
+							+ ": " + extractStringElementFromInnerJSONArray(newsData, "articles", i, "title"),
 					"Verdana", 8);
 		}
 	}
