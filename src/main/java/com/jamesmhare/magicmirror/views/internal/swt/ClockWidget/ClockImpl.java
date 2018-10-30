@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTException;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
@@ -51,6 +52,7 @@ public class ClockImpl implements Clock {
 		clockLabel.setBackground(ApplicationConstants.BLACK);
 		clockLabel.setForeground(ApplicationConstants.WHITE);
 		clockLabel.setFont(clockLabelFont);
+		clockLabel.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, true, true, 1, 1));
 		return clockLabel;
 	}
 

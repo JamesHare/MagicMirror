@@ -125,7 +125,6 @@ public class WeatherImpl implements Weather {
 		weatherLabel.setForeground(ApplicationConstants.WHITE);
 		weatherLabel.setFont(weatherLabelFont);
 		weatherLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, true, true, 1, 1));
-		// weatherLabel.setAlignment(SWT.RIGHT);
 		return weatherLabel;
 	}
 

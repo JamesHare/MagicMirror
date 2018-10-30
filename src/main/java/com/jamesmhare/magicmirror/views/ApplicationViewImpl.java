@@ -16,6 +16,8 @@ import com.jamesmhare.magicmirror.views.internal.swt.InspiringQuotesWidget.Inspi
 import com.jamesmhare.magicmirror.views.internal.swt.InspiringQuotesWidget.InspiringQuotesWidgetFactory;
 import com.jamesmhare.magicmirror.views.internal.swt.NewsWidget.NewsWidget;
 import com.jamesmhare.magicmirror.views.internal.swt.NewsWidget.NewsWidgetFactory;
+import com.jamesmhare.magicmirror.views.internal.swt.SpacingComposite.SpacingComposite;
+import com.jamesmhare.magicmirror.views.internal.swt.SpacingComposite.SpacingCompositeFactory;
 import com.jamesmhare.magicmirror.views.internal.swt.WeatherWidget.Weather;
 import com.jamesmhare.magicmirror.views.internal.swt.WeatherWidget.WeatherFactory;
 
@@ -33,10 +35,26 @@ public class ApplicationViewImpl implements ApplicationView {
 	private Weather weather;
 	private InspiringQuotesWidget inspiringQuotesWidget;
 	private NewsWidget newsWidget;
+	private SpacingComposite spaceA2;
+	private SpacingComposite spaceB1;
+	private SpacingComposite spaceB2;
+	private SpacingComposite spaceB3;
+	private SpacingComposite spaceC1;
+	private SpacingComposite spaceC2;
+	private SpacingComposite spaceD1;
+	private SpacingComposite spaceD3;
 	private final ClockFactory clockFactory;
 	private final WeatherFactory weatherFactory;
 	private final InspiringQuotesWidgetFactory inspiringQuotesWidgetFactory;
 	private final NewsWidgetFactory newsWidgetFactory;
+	private final SpacingCompositeFactory spaceA2Factory;
+	private final SpacingCompositeFactory spaceB1Factory;
+	private final SpacingCompositeFactory spaceB2Factory;
+	private final SpacingCompositeFactory spaceB3Factory;
+	private final SpacingCompositeFactory spaceC1Factory;
+	private final SpacingCompositeFactory spaceC2Factory;
+	private final SpacingCompositeFactory spaceD1Factory;
+	private final SpacingCompositeFactory spaceD3Factory;
 
 	/**
 	 * Constructor for the parent view which handles the centering of the parent
@@ -47,7 +65,9 @@ public class ApplicationViewImpl implements ApplicationView {
 	 */
 	public ApplicationViewImpl(final Shell shell, Display display) {
 		this(shell, display, new ClockFactory(), new WeatherFactory(), new InspiringQuotesWidgetFactory(),
-				new NewsWidgetFactory());
+				new NewsWidgetFactory(), new SpacingCompositeFactory(), new SpacingCompositeFactory(),
+				new SpacingCompositeFactory(), new SpacingCompositeFactory(), new SpacingCompositeFactory(),
+				new SpacingCompositeFactory(), new SpacingCompositeFactory(), new SpacingCompositeFactory());
 	}
 
 	/**
@@ -69,7 +89,11 @@ public class ApplicationViewImpl implements ApplicationView {
 	 */
 	public ApplicationViewImpl(final Shell shell, Display display, ClockFactory clockFactory,
 			WeatherFactory weatherFactory, InspiringQuotesWidgetFactory inspiringQuotesWidgetFactory,
-			NewsWidgetFactory newsWidgetFactory) {
+			NewsWidgetFactory newsWidgetFactory, SpacingCompositeFactory spaceA2Factory,
+			SpacingCompositeFactory spaceB1Factory, SpacingCompositeFactory spaceB2Factory,
+			SpacingCompositeFactory spaceB3Factory, SpacingCompositeFactory spaceC1Factory,
+			SpacingCompositeFactory spaceC2Factory, SpacingCompositeFactory spaceD1Factory,
+			SpacingCompositeFactory spaceD3Factory) {
 		Preconditions.checkArgument(shell != null, ApplicationViewConstants.APPLICATION_VIEW_SHELL_NULL_ERROR_MESSAGE);
 		Preconditions.checkArgument(display != null,
 				ApplicationViewConstants.APPLICATION_VIEW_DISPLAY_NULL_ERROR_MESSAGE);
@@ -87,6 +111,14 @@ public class ApplicationViewImpl implements ApplicationView {
 		this.weatherFactory = weatherFactory;
 		this.inspiringQuotesWidgetFactory = inspiringQuotesWidgetFactory;
 		this.newsWidgetFactory = newsWidgetFactory;
+		this.spaceA2Factory = spaceA2Factory;
+		this.spaceB1Factory = spaceB1Factory;
+		this.spaceB2Factory = spaceB2Factory;
+		this.spaceB3Factory = spaceB3Factory;
+		this.spaceC1Factory = spaceC1Factory;
+		this.spaceC2Factory = spaceC2Factory;
+		this.spaceD1Factory = spaceD1Factory;
+		this.spaceD3Factory = spaceD3Factory;
 		shell.setText(ApplicationViewConstants.APPLICATION_VIEW_SHELL_TITLE);
 		shell.setBackground(ApplicationConstants.BLACK);
 		/**
@@ -115,16 +147,40 @@ public class ApplicationViewImpl implements ApplicationView {
 		Composite clockComposite = new Composite(shell, SWT.NONE);
 		clockComposite.setLayout(new GridLayout(1, false));
 		clock = clockFactory.createClock(clockComposite, display);
+		Composite spaceA2Composite = new Composite(shell, SWT.NONE);
+		spaceA2Composite.setLayout(new GridLayout(1, false));
+		spaceA2 = spaceA2Factory.createSpacingComposite(clockComposite, display);
 		Composite weatherComposite = new Composite(shell, SWT.NONE);
 		weatherComposite.setLayout(new GridLayout(1, false));
 		weather = weatherFactory.createWeather(weatherComposite, display);
+		Composite spaceB1Composite = new Composite(shell, SWT.NONE);
+		spaceB1Composite.setLayout(new GridLayout(1, false));
+		spaceB1 = spaceB1Factory.createSpacingComposite(clockComposite, display);
+		Composite spaceB2Composite = new Composite(shell, SWT.NONE);
+		spaceB2Composite.setLayout(new GridLayout(1, false));
+		spaceB2 = spaceB2Factory.createSpacingComposite(clockComposite, display);
+		Composite spaceB3Composite = new Composite(shell, SWT.NONE);
+		spaceB3Composite.setLayout(new GridLayout(1, false));
+		spaceB3 = spaceB3Factory.createSpacingComposite(clockComposite, display);
+		Composite spaceC1Composite = new Composite(shell, SWT.NONE);
+		spaceC1Composite.setLayout(new GridLayout(1, false));
+		spaceC1 = spaceC1Factory.createSpacingComposite(clockComposite, display);
+		Composite spaceC2Composite = new Composite(shell, SWT.NONE);
+		spaceC2Composite.setLayout(new GridLayout(1, false));
+		spaceC2 = spaceC2Factory.createSpacingComposite(clockComposite, display);
+		Composite newsWidgetComposite = new Composite(shell, SWT.NONE);
+		newsWidgetComposite.setLayout(new GridLayout(1, false));
+		newsWidget = newsWidgetFactory.createNewsWidget(newsWidgetComposite, display);
+		Composite spaceD1Composite = new Composite(shell, SWT.NONE);
+		spaceD1Composite.setLayout(new GridLayout(1, false));
+		spaceD1 = spaceD1Factory.createSpacingComposite(clockComposite, display);
 		Composite inspiringQuotesComposite = new Composite(shell, SWT.NONE);
 		inspiringQuotesComposite.setLayout(new GridLayout(1, false));
 		inspiringQuotesWidget = inspiringQuotesWidgetFactory.createInspiringQuotesWidget(inspiringQuotesComposite,
 				display);
-		Composite newsWidgetComposite = new Composite(shell, SWT.NONE);
-		newsWidgetComposite.setLayout(new GridLayout(1, false));
-		newsWidget = newsWidgetFactory.createNewsWidget(newsWidgetComposite, display);
+		Composite spaceD3Composite = new Composite(shell, SWT.NONE);
+		spaceD3Composite.setLayout(new GridLayout(1, false));
+		spaceD3 = spaceD3Factory.createSpacingComposite(clockComposite, display);
 	}
 
 	/**

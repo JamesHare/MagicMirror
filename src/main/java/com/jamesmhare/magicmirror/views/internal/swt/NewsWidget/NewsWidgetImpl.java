@@ -80,7 +80,7 @@ public class NewsWidgetImpl implements NewsWidget {
 			public void run() throws SWTException {
 				while (!display.isDisposed()) {
 					try {
-						Thread.sleep(900000); // sleep for 15 minutes.
+						Thread.sleep(1800000); // sleep for 30 minutes.
 						display.asyncExec(new Runnable() {
 							@Override
 							public void run() {
@@ -109,7 +109,7 @@ public class NewsWidgetImpl implements NewsWidget {
 		weatherLabel.setBackground(ApplicationConstants.BLACK);
 		weatherLabel.setForeground(ApplicationConstants.WHITE);
 		weatherLabel.setFont(weatherLabelFont);
-		weatherLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, true, true, 1, 1));
+		weatherLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.BOTTOM, true, true, 1, 1));
 		return weatherLabel;
 	}
 
