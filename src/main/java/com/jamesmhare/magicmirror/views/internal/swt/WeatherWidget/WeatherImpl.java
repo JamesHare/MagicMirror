@@ -58,8 +58,8 @@ public class WeatherImpl implements Weather {
 		currentTemperature = createWeatherLabel(parent, display,
 				convertKelvinToFahrenheit(extractDoubleElementFromInnerJSONObject(weatherData, "main", "temp")) + "°F",
 				"Verdana", 28);
-		sunriseTime = createWeatherLabel(parent, display,
-				"Sunrise: " + convertDateToString(extractLongElementFromInnerJSONObject(weatherData, "sys", "sunrise")),
+		sunriseTime = createWeatherLabel(parent, display, "Sunrise: "
+				+ convertDateToString(extractLongElementFromInnerJSONObject(weatherData, "sys", "sunrise")) + "   ",
 				"Verdana", 16);
 		sunsetTime = createWeatherLabel(parent, display,
 				"Sunset: " + convertDateToString(extractLongElementFromInnerJSONObject(weatherData, "sys", "sunset")),
@@ -124,7 +124,7 @@ public class WeatherImpl implements Weather {
 		weatherLabel.setBackground(ApplicationConstants.BLACK);
 		weatherLabel.setForeground(ApplicationConstants.WHITE);
 		weatherLabel.setFont(weatherLabelFont);
-		weatherLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, true, true, 1, 1));
+		weatherLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, true, 1, 1));
 		return weatherLabel;
 	}
 

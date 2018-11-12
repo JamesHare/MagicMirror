@@ -25,6 +25,8 @@ public class SpacingCompositeImpl implements SpacingComposite {
 		display = this.display;
 		parent.setBackground(ApplicationConstants.BLACK);
 		blankLabel = new Label(parent, SWT.NONE);
+		blankLabel.setBackground(ApplicationConstants.BLACK);
+		blankLabel.setForeground(ApplicationConstants.BLACK);
 	}
 
 	/**
