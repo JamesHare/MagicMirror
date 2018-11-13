@@ -54,16 +54,16 @@ public class WeatherImpl implements Weather {
 		currentConditions = createWeatherLabel(parent, display,
 				extractStringElementFromInnerJSONArray(weatherData, "weather", "description") + " in "
 						+ (String) (weatherData.get("name")),
-				"Verdana", 16);
+				"Verdana", 12, SWT.LEFT);
 		currentTemperature = createWeatherLabel(parent, display,
 				convertKelvinToFahrenheit(extractDoubleElementFromInnerJSONObject(weatherData, "main", "temp")) + "°F",
-				"Verdana", 28);
+				"Verdana", 34, SWT.RIGHT);
 		sunriseTime = createWeatherLabel(parent, display, "Sunrise: "
 				+ convertDateToString(extractLongElementFromInnerJSONObject(weatherData, "sys", "sunrise")) + "   ",
-				"Verdana", 16);
+				"Verdana", 18, SWT.RIGHT);
 		sunsetTime = createWeatherLabel(parent, display,
 				"Sunset: " + convertDateToString(extractLongElementFromInnerJSONObject(weatherData, "sys", "sunset")),
-				"Verdana", 16);
+				"Verdana", 18, SWT.RIGHT);
 	}
 
 	private JSONObject retrieveWeatherData() {
@@ -111,7 +111,8 @@ public class WeatherImpl implements Weather {
 		}.start();
 	}
 
-	private Label createWeatherLabel(Composite parent, Display display, String text, String fontType, int fontSize) {
+	private Label createWeatherLabel(Composite parent, Display display, String text, String fontType, int fontSize,
+			int horizontalAlignment) {
 		Preconditions.checkArgument(parent != null, WeatherImplConstants.COMPOSITE_NULL_ERROR_MESSAGE);
 		Preconditions.checkArgument(display != null, WeatherImplConstants.DISPLAY_NULL_ERROR_MESSAGE);
 		Preconditions.checkArgument(text != null, WeatherImplConstants.WEATHER_TEXT_NULL_ERROR_MESSAGE);
@@ -124,7 +125,7 @@ public class WeatherImpl implements Weather {
 		weatherLabel.setBackground(ApplicationConstants.BLACK);
 		weatherLabel.setForeground(ApplicationConstants.WHITE);
 		weatherLabel.setFont(weatherLabelFont);
-		weatherLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, true, 1, 1));
+		weatherLabel.setLayoutData(new GridData(horizontalAlignment, SWT.CENTER, true, false, 1, 1));
 		return weatherLabel;
 	}
 

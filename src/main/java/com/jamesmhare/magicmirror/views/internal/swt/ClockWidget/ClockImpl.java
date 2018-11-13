@@ -34,7 +34,7 @@ public class ClockImpl implements Clock {
 		parent.setBackground(ApplicationConstants.BLACK);
 		this.display = display;
 		runningDate = createClockLabel(parent, display, "EEEE, MMMM dd, yyyy", "Verdana", 14);
-		runningClock = createClockLabel(parent, display, "h:mm:ss a", "Arial Narrow", 32);
+		runningClock = createClockLabel(parent, display, "h:mm:ss a", "Arial Narrow", 34);
 		startClock();
 	}
 
@@ -52,7 +52,7 @@ public class ClockImpl implements Clock {
 		clockLabel.setBackground(ApplicationConstants.BLACK);
 		clockLabel.setForeground(ApplicationConstants.WHITE);
 		clockLabel.setFont(clockLabelFont);
-		clockLabel.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, true, true, 1, 1));
+		clockLabel.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, true, false, 1, 1));
 		return clockLabel;
 	}
 

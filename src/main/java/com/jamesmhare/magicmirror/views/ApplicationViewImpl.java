@@ -145,41 +145,48 @@ public class ApplicationViewImpl implements ApplicationView {
 		 * with true indicating that each column has an equal width.
 		 */
 		Composite clockComposite = new Composite(shell, SWT.NONE);
-		clockComposite.setLayout(new GridLayout(3, false));
+		clockComposite.setLayout(new GridLayout(1, false));
 		GridData clockGridData = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1);
 		clockComposite.setLayoutData(clockGridData);
 		clock = clockFactory.createClock(clockComposite, display);
 
 		Composite spaceA2Composite = new Composite(shell, SWT.NONE);
-		spaceA2Composite.setLayout(new GridLayout(3, false));
+		spaceA2Composite.setLayout(new GridLayout(1, false));
 		GridData spaceA2GridData = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1);
 		spaceA2Composite.setLayoutData(spaceA2GridData);
 		spaceA2 = spaceA2Factory.createSpacingComposite(spaceA2Composite, display);
 
 		Composite weatherComposite = new Composite(shell, SWT.NONE);
-		weatherComposite.setLayout(new GridLayout(3, false));
+		weatherComposite.setLayout(new GridLayout(2, false));
 		GridData weatherGridData = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1);
 		weatherComposite.setLayoutData(weatherGridData);
 		weather = weatherFactory.createWeather(weatherComposite, display);
 
 		Composite spaceRowBCComposite = new Composite(shell, SWT.NONE);
-		spaceRowBCComposite.setLayout(new GridLayout(3, false));
-		GridData spaceRowBCGridData = new GridData(SWT.FILL, SWT.FILL, true, false, 6, 1);
-		spaceA2Composite.setLayoutData(spaceRowBCGridData);
+		spaceRowBCComposite.setLayout(new GridLayout(1, false));
+		GridData spaceRowBCGridData = new GridData(SWT.FILL, SWT.FILL, true, false, 3, 2);
+		spaceRowBCComposite.setLayoutData(spaceRowBCGridData);
 		spaceB2 = spaceB2Factory.createSpacingComposite(spaceRowBCComposite, display);
 
 		Composite newsWidgetComposite = new Composite(shell, SWT.NONE);
-		newsWidgetComposite.setLayout(new GridLayout(3, false));
-		GridData newsWidgetGridData = new GridData(SWT.FILL, SWT.FILL, true, false, 3, 2);
+		newsWidgetComposite.setLayout(new GridLayout(1, false));
+		GridData newsWidgetGridData = new GridData(SWT.FILL, SWT.FILL, true, false, 2, 2);
 		newsWidgetComposite.setLayoutData(newsWidgetGridData);
 		newsWidget = newsWidgetFactory.createNewsWidget(newsWidgetComposite, display);
 
+		Composite spaceB3Composite = new Composite(shell, SWT.NONE);
+		spaceB3Composite.setLayout(new GridLayout(1, false));
+		GridData spaceB3GridData = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 2);
+		spaceB3Composite.setLayoutData(spaceB3GridData);
+		spaceB2 = spaceB3Factory.createSpacingComposite(spaceB3Composite, display);
+
 		Composite inspiringQuotesComposite = new Composite(shell, SWT.NONE);
-		inspiringQuotesComposite.setLayout(new GridLayout(3, false));
+		inspiringQuotesComposite.setLayout(new GridLayout(1, false));
 		GridData inspiringQuotesGridData = new GridData(SWT.FILL, SWT.FILL, true, false, 3, 1);
 		spaceA2Composite.setLayoutData(inspiringQuotesGridData);
 		inspiringQuotesWidget = inspiringQuotesWidgetFactory.createInspiringQuotesWidget(inspiringQuotesComposite,
 				display);
+
 	}
 
 	/**

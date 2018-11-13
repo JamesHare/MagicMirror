@@ -26,7 +26,7 @@ import com.sun.jersey.api.client.WebResource;
  * @author James Hare
  */
 public class NewsWidgetImpl implements NewsWidget {
-	private Label[] headlines = new Label[10];
+	private Label[] headlines = new Label[NewsWidgetImplConstants.NUMBER_OF_HEADLINES_TO_DISPLAY];
 	private JSONObject newsData;
 	private Display display;
 	private ApplicationProperties properties;
@@ -109,7 +109,7 @@ public class NewsWidgetImpl implements NewsWidget {
 		weatherLabel.setBackground(ApplicationConstants.BLACK);
 		weatherLabel.setForeground(ApplicationConstants.WHITE);
 		weatherLabel.setFont(weatherLabelFont);
-		weatherLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.BOTTOM, true, true, 1, 1));
+		weatherLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, true, 1, 1));
 		return weatherLabel;
 	}
 

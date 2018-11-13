@@ -18,4 +18,5 @@ public class NewsWidgetImplConstants {
 	public static final String NEWS_UPDATE_THREAD_ERROR_MESSAGE = "There was an error in the news widget update thread. ";
 	public static final String LOG_MESSAGE_NEWS_INFO_UPDATED = "The news widget information has been updated.";
 	public static final String LOG_MESSAGE_NEWS_INFO_RETRIEVED = "The news widget information has been successfully retrieved.";
+	public static final int NUMBER_OF_HEADLINES_TO_DISPLAY = 6;
 }
