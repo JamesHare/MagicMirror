@@ -17,23 +17,21 @@ import com.jamesmhare.magicmirror.applicationconstants.ApplicationConstants;
  */
 public class SpacingCompositeImpl implements SpacingComposite {
 	private Display display;
-	private Label blankLabel;
+	private Label placeHolderLabel;
 
 	public SpacingCompositeImpl(Composite parent, Display display) {
 		Preconditions.checkArgument(parent != null, SpacingCompositeImplConstants.COMPOSITE_NULL_ERROR_MESSAGE);
-		Preconditions.checkArgument(parent != null, SpacingCompositeImplConstants.DISPLAY_NULL_ERROR_MESSAGE);
+		Preconditions.checkArgument(display != null, SpacingCompositeImplConstants.DISPLAY_NULL_ERROR_MESSAGE);
 		display = this.display;
 		parent.setBackground(ApplicationConstants.BLACK);
-		blankLabel = new Label(parent, SWT.NONE);
-		blankLabel.setBackground(ApplicationConstants.BLACK);
-		blankLabel.setForeground(ApplicationConstants.BLACK);
+		placeHolderLabel = new Label(parent, SWT.NONE);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public Label getBlankLabel() {
-		return blankLabel;
+	public Label getPlaceHolderLabel() {
+		return placeHolderLabel;
 	}
 
 }

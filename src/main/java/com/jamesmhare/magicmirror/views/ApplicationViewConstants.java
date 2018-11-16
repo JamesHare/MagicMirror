@@ -13,6 +13,7 @@ public class ApplicationViewConstants {
 	public static final String APPLICATION_VIEW_INSPIRING_QUOTES_WIDGET_FACTORY_NULL_ERROR_MESSAGE = "Inspiring Quotes Widget Factory cannot be null.";
 	public static final String APPLICATION_VIEW_WEATHER_FACTORY_NULL_ERROR_MESSAGE = "Weather Factory cannot be null.";
 	public static final String APPLICATION_VIEW_NEWS_WIDGET_FACTORY_NULL_ERROR_MESSAGE = "News Widget Factory cannot be null.";
+	public static final String APPLICATION_VIEW_SPACING_WIDGET_FACTORY_NULL_ERROR_MESSAGE = "Spacing Widget Factory cannot be null.";
 	public static final String CREATE_WIDGETS_SHELL_NULL_ERROR_MESSAGE = "Create Widgets Shell cannot be null.";
 	public static final String CREATE_WIDGETS_DISPLAY_NULL_ERROR_MESSAGE = "Create Widgets Display cannot be null.";
 	public static final String CENTER_SHELL_SHELL_NULL_ERROR_MESSAGE = "Center Shell Shell cannot be null.";

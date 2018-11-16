@@ -11,9 +11,9 @@ import org.eclipse.swt.widgets.Label;
  */
 public interface SpacingComposite {
 	/**
-	 * Returns a blank {@link Label}.
+	 * Returns a blank place holder {@link Label}.
 	 * 
-	 * @return - The blank {@link Label}.
+	 * @return - The place holder {@link Label}.
 	 */
-	Label getBlankLabel();
+	Label getPlaceHolderLabel();
 }

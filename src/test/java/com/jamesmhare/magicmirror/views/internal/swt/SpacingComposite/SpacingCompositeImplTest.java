@@ -1,7 +1,6 @@
 package com.jamesmhare.magicmirror.views.internal.swt.SpacingComposite;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -13,8 +12,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import com.jamesmhare.magicmirror.applicationconstants.ApplicationConstants;
 
 /**
  * Test for the {@link SpacingCompositeImpl} class.
@@ -83,17 +80,7 @@ public class SpacingCompositeImplTest {
 	@Test
 	public void testLabelsAreEnabledByDefault() {
 		testSpacingCompositeImpl = new SpacingCompositeImpl(shell, display);
-		assertTrue(testSpacingCompositeImpl.getBlankLabel().isEnabled());
-	}
-
-	/**
-	 * Test to ensure that the colors of the {@link SpacingComposite} are set
-	 * correctly when a new {@link SpacingCompositeImpl} is constructed.
-	 */
-	@Test
-	public void testCompositeColorsAreSetToCorrectValues() {
-		testSpacingCompositeImpl = new SpacingCompositeImpl(shell, display);
-		assertEquals(ApplicationConstants.BLACK, testSpacingCompositeImpl.getBlankLabel().getBackground());
+		assertTrue(testSpacingCompositeImpl.getPlaceHolderLabel().isEnabled());
 	}
 
 	private Shell getShell() {

@@ -26,6 +26,7 @@ import com.sun.jersey.api.client.WebResource;
  * @author James Hare
  */
 public class NewsWidgetImpl implements NewsWidget {
+	private Label newsWidgetTitleLabel;
 	private Label[] headlines = new Label[NewsWidgetImplConstants.NUMBER_OF_HEADLINES_TO_DISPLAY];
 	private JSONObject newsData;
 	private Display display;
@@ -38,6 +39,8 @@ public class NewsWidgetImpl implements NewsWidget {
 		this.display = display;
 		parent.setBackground(ApplicationConstants.BLACK);
 		properties = new ApplicationProperties();
+		newsWidgetTitleLabel = createNewsWidgetLabel(parent, display, NewsWidgetImplConstants.NEWS_WIDGET_TITLE,
+				"Arial", 12);
 		updateNewsWidget(parent);
 		startNewsWidgetUpdater(parent);
 	}
@@ -103,14 +106,14 @@ public class NewsWidgetImpl implements NewsWidget {
 		Preconditions.checkArgument(!text.isEmpty(), NewsWidgetImplConstants.NEWS_TEXT_EMPTY_ERROR_MESSAGE);
 		Preconditions.checkArgument(fontType != null, NewsWidgetImplConstants.FONTTYPE_NULL_ERROR_MESSAGE);
 		Preconditions.checkArgument(!fontType.isEmpty(), NewsWidgetImplConstants.FONTTYPE_EMPTY_ERROR_MESSAGE);
-		Label weatherLabel = new Label(parent, SWT.NONE);
-		Font weatherLabelFont = new Font(display, fontType, fontSize, SWT.NONE);
-		weatherLabel.setText(text);
-		weatherLabel.setBackground(ApplicationConstants.BLACK);
-		weatherLabel.setForeground(ApplicationConstants.WHITE);
-		weatherLabel.setFont(weatherLabelFont);
-		weatherLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, true, 1, 1));
-		return weatherLabel;
+		Label newsLabel = new Label(parent, SWT.NONE);
+		Font newsLabelFont = new Font(display, fontType, fontSize, SWT.NONE);
+		newsLabel.setText(text);
+		newsLabel.setBackground(ApplicationConstants.BLACK);
+		newsLabel.setForeground(ApplicationConstants.WHITE);
+		newsLabel.setFont(newsLabelFont);
+		newsLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, true, 1, 1));
+		return newsLabel;
 	}
 
 	private String extractStringElementFromInnerJSONArray(JSONObject jsonObject, String arrayKey, int arrayIndex,
