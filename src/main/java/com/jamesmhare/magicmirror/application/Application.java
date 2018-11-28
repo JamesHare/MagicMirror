@@ -25,7 +25,7 @@ public class Application {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		BasicConfigurator.configure();
+		BasicConfigurator.configure();	// Sets configuration for log4j
 		Display display = new Display();
 		Shell shell = new Shell(display, SWT.BORDER | SWT.CLOSE | SWT.MIN | SWT.MAX | SWT.RESIZE);
 		ApplicationView applicationView = new ApplicationViewImpl(shell, display);
