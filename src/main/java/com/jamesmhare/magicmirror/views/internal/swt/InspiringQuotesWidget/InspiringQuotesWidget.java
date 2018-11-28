@@ -3,8 +3,8 @@ package com.jamesmhare.magicmirror.views.internal.swt.InspiringQuotesWidget;
 import org.eclipse.swt.widgets.Label;
 
 /**
- * This serves as an interface for the {@link InspiringQuotesWidget} object that
- * will show user an inspiring quote every day.
+ * This serves as an interface for the InspiringQuotesWidget object that will
+ * show user an inspiring quote every day.
  * 
  * @author James Hare
  */

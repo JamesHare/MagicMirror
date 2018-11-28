@@ -1,5 +1,6 @@
 package com.jamesmhare.magicmirror.application;
 
+import org.apache.log4j.BasicConfigurator;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -24,6 +25,7 @@ public class Application {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		BasicConfigurator.configure();	// Sets configuration for log4j
 		Display display = new Display();
 		Shell shell = new Shell(display, SWT.BORDER | SWT.CLOSE | SWT.MIN | SWT.MAX | SWT.RESIZE);
 		ApplicationView applicationView = new ApplicationViewImpl(shell, display);
