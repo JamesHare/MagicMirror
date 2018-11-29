@@ -138,4 +138,11 @@ public class NewsWidgetImpl implements NewsWidget {
 		return headlines;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	public Label getNewsWidgetTitleLabel() {
+		return newsWidgetTitleLabel;
+	}
+
 }

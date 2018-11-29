@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import org.apache.log4j.BasicConfigurator;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -60,6 +61,7 @@ public class ApplicationViewImplTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		BasicConfigurator.configure();
 		MockitoAnnotations.initMocks(this);
 		shell = getShell();
 		display = mock(Display.class);

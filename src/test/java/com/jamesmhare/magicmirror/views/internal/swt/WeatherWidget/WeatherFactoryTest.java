@@ -1,4 +1,4 @@
-package com.jamesmhare.magicmirror.views.internal.swt.ClockWidget;
+package com.jamesmhare.magicmirror.views.internal.swt.WeatherWidget;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
@@ -16,12 +16,12 @@ import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 
 /**
- * Test for the {@link ClockFactory} class.
+ * Test for the {@link WeatherFactory} class.
  * 
  * @author James Hare
  *
  */
-public class ClockFactoryTest {
+public class WeatherFactoryTest {
 	private Display display;
 	private Shell shell;
 
@@ -41,37 +41,37 @@ public class ClockFactoryTest {
 
 	/**
 	 * Test to ensure that {@link IllegalArgumentException} is thrown from
-	 * {@link ClockFactory} if parent {@link Composite} is {@link Null}.
+	 * {@link WeatherFactory} if parent {@link Composite} is {@link Null}.
 	 */
 	@Test
-	public void testClockFactoryNullParentCompositeThrowsIllegalArgumentException() {
+	public void testWeatherFactoryNullParentCompositeThrowsIllegalArgumentException() {
 		exception.expect(IllegalArgumentException.class);
-		exception.expectMessage(ClockImplConstants.COMPOSITE_NULL_ERROR_MESSAGE);
-		ClockFactory clockFactory = new ClockFactory();
-		clockFactory.createClock(null, display);
+		exception.expectMessage(WeatherImplConstants.COMPOSITE_NULL_ERROR_MESSAGE);
+		WeatherFactory weatherFactory = new WeatherFactory();
+		weatherFactory.createWeather(null, display);
 	}
 
 	/**
 	 * Test to ensure that {@link IllegalArgumentException} is thrown from
-	 * {@link ClockFactory} if parent {@link Display} is {@link Null}.
+	 * {@link WeatherFactory} if parent {@link Display} is {@link Null}.
 	 */
 	@Test
-	public void testClockFactoryNullDisplayThrowsIllegalArgumentException() {
+	public void testWeatherFactoryNullDisplayThrowsIllegalArgumentException() {
 		exception.expect(IllegalArgumentException.class);
-		exception.expectMessage(ClockImplConstants.DISPLAY_NULL_ERROR_MESSAGE);
-		ClockFactory clockFactory = new ClockFactory();
-		clockFactory.createClock(shell, null);
+		exception.expectMessage(WeatherImplConstants.DISPLAY_NULL_ERROR_MESSAGE);
+		WeatherFactory weatherFactory = new WeatherFactory();
+		weatherFactory.createWeather(shell, null);
 	}
 
 	/**
-	 * Test to ensure that {@link ClockFactory} works correctly with good input and
-	 * that a new {@link Clock} object was created.
+	 * Test to ensure that {@link WeatherFactory} works correctly with good input
+	 * and that a new {@link Weather} object was created.
 	 */
 	@Test
-	public void testClockFactorySuccess() {
-		ClockFactory clockFactory = new ClockFactory();
-		Clock testClockObject = clockFactory.createClock(shell, display);
-		assertThat(testClockObject, instanceOf(Clock.class));
+	public void testWeatherFactorySuccess() {
+		WeatherFactory weatherFactory = new WeatherFactory();
+		Weather testWeather = weatherFactory.createWeather(shell, display);
+		assertThat(testWeather, instanceOf(Weather.class));
 	}
 
 	private Shell getShell() {

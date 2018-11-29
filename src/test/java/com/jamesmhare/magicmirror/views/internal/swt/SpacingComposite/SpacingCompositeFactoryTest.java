@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 
+import org.apache.log4j.BasicConfigurator;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -32,6 +33,7 @@ public class SpacingCompositeFactoryTest {
 
 	@Before
 	public void setUp() throws Exception {
+		BasicConfigurator.configure();
 		shell = getShell();
 		display = mock(Display.class);
 		mockComposite = new Composite(shell, SWT.NONE);

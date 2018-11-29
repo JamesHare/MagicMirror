@@ -154,4 +154,32 @@ public class WeatherImpl implements Weather {
 		return new String(new SimpleDateFormat("h:mm a").format(new Date(dateUTC * 1000L)));
 
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public Label getCurrentConditions() {
+		return currentConditions;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public Label getCurrentTemperature() {
+		return currentTemperature;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public Label getSunriseTime() {
+		return sunriseTime;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public Label getSunsetTime() {
+		return sunsetTime;
+	}
 }

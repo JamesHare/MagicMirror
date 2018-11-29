@@ -1,4 +1,4 @@
-package com.jamesmhare.magicmirror.views.internal.swt.ClockWidget;
+package com.jamesmhare.magicmirror.views.internal.swt.NewsWidget;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
@@ -16,12 +16,12 @@ import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 
 /**
- * Test for the {@link ClockFactory} class.
+ * Test for the {@link NewsWidgetFactory} class.
  * 
  * @author James Hare
  *
  */
-public class ClockFactoryTest {
+public class NewsWidgetFactoryTest {
 	private Display display;
 	private Shell shell;
 
@@ -41,37 +41,37 @@ public class ClockFactoryTest {
 
 	/**
 	 * Test to ensure that {@link IllegalArgumentException} is thrown from
-	 * {@link ClockFactory} if parent {@link Composite} is {@link Null}.
+	 * {@link NewsWidgetFactory} if parent {@link Composite} is {@link Null}.
 	 */
 	@Test
-	public void testClockFactoryNullParentCompositeThrowsIllegalArgumentException() {
+	public void testNewsWidgetFactoryNullParentCompositeThrowsIllegalArgumentException() {
 		exception.expect(IllegalArgumentException.class);
-		exception.expectMessage(ClockImplConstants.COMPOSITE_NULL_ERROR_MESSAGE);
-		ClockFactory clockFactory = new ClockFactory();
-		clockFactory.createClock(null, display);
+		exception.expectMessage(NewsWidgetImplConstants.COMPOSITE_NULL_ERROR_MESSAGE);
+		NewsWidgetFactory newsWidgetFactory = new NewsWidgetFactory();
+		newsWidgetFactory.createNewsWidget(null, display);
 	}
 
 	/**
 	 * Test to ensure that {@link IllegalArgumentException} is thrown from
-	 * {@link ClockFactory} if parent {@link Display} is {@link Null}.
+	 * {@link NewsWidgetFactory} if parent {@link Display} is {@link Null}.
 	 */
 	@Test
-	public void testClockFactoryNullDisplayThrowsIllegalArgumentException() {
+	public void testNewsWidgetFactoryNullDisplayThrowsIllegalArgumentException() {
 		exception.expect(IllegalArgumentException.class);
-		exception.expectMessage(ClockImplConstants.DISPLAY_NULL_ERROR_MESSAGE);
-		ClockFactory clockFactory = new ClockFactory();
-		clockFactory.createClock(shell, null);
+		exception.expectMessage(NewsWidgetImplConstants.DISPLAY_NULL_ERROR_MESSAGE);
+		NewsWidgetFactory newsWidgetFactory = new NewsWidgetFactory();
+		newsWidgetFactory.createNewsWidget(shell, null);
 	}
 
 	/**
-	 * Test to ensure that {@link ClockFactory} works correctly with good input and
-	 * that a new {@link Clock} object was created.
+	 * Test to ensure that {@link NewsWidgetFactory} works correctly with good input
+	 * and that a new {@link NewsWidget} object was created.
 	 */
 	@Test
-	public void testClockFactorySuccess() {
-		ClockFactory clockFactory = new ClockFactory();
-		Clock testClockObject = clockFactory.createClock(shell, display);
-		assertThat(testClockObject, instanceOf(Clock.class));
+	public void testNewsWidgetFactorySuccess() {
+		NewsWidgetFactory newsWidgetFactory = new NewsWidgetFactory();
+		NewsWidget testNewsWidget = newsWidgetFactory.createNewsWidget(shell, display);
+		assertThat(testNewsWidget, instanceOf(NewsWidget.class));
 	}
 
 	private Shell getShell() {

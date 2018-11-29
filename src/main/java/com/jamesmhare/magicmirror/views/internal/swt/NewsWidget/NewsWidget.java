@@ -15,4 +15,11 @@ public interface NewsWidget {
 	 * @return - The headlines array of {@link Label}.
 	 */
 	Label[] getHeadlineLabels();
+
+	/**
+	 * Returns the news widget title {@link Label}.
+	 * 
+	 * @return - The news widget title {@link Label}.
+	 */
+	Label getNewsWidgetTitleLabel();
 }

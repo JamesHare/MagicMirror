@@ -6,6 +6,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
+import org.apache.log4j.BasicConfigurator;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.junit.After;
@@ -15,9 +16,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import com.jamesmhare.magicmirror.applicationconstants.ApplicationConstants;
-import com.jamesmhare.magicmirror.views.internal.swt.ClockWidget.Clock;
-import com.jamesmhare.magicmirror.views.internal.swt.ClockWidget.ClockImpl;
-import com.jamesmhare.magicmirror.views.internal.swt.ClockWidget.ClockImplConstants;
 
 /**
  * Test for the {@link ClockImpl} class.
@@ -34,6 +32,7 @@ public class ClockImplTest {
 
 	@Before
 	public void setUp() throws Exception {
+		BasicConfigurator.configure();
 		shell = getShell();
 		display = mock(Display.class);
 		testClockImpl = new ClockImpl(shell, display);

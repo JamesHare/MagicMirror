@@ -5,6 +5,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
+import org.apache.log4j.BasicConfigurator;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.junit.After;
@@ -28,6 +29,7 @@ public class SpacingCompositeImplTest {
 
 	@Before
 	public void setUp() throws Exception {
+		BasicConfigurator.configure();
 		shell = getShell();
 		display = mock(Display.class);
 		testSpacingCompositeImpl = new SpacingCompositeImpl(shell, display);
